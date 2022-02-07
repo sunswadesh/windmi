@@ -14,6 +14,10 @@ Swadesh Patra
 3. Solar wind dependent ring current decay time
 4. Tail current validation. 
 
+**Versions: Simulink, matlab script, C:**
+1. Fully functional block level solutions for the windmi ODEs using simulink blocks.
+2. Parameterized Tunable variables are enabled in this matlab script version of the windmi model. 
+
 
 
 Original Model Description
