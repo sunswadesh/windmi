@@ -22,16 +22,16 @@ f = ones(1,length(ft)); f(end/2:end) = 0; % Create step input
 gt = linspace(0,155,50);
 % g = 3*sin(gt-0.25);
 g = ones(1,length(gt))*10; g(end/1.8:end) = 50; % Two step ring current recovery
-
+y0 = [10;10];
 
 tspan = [1 155];
-ic = 1;
+ic = [10;10];
 opts = odeset('RelTol',1e-2,'AbsTol',1e-4);
 [t,y] = ode45(@(t,y) myode(t,y,ft,f,gt,g), tspan, ic, opts);
 
 plot(t,-y,'*-'); grid on; axis tight
 %The ODEs.
-% function dpdt = lotkaODE(t,p)
+% function dpdt = lotkaODE(t,p)        
 % % LOTKA Lotka-Volterra predator-prey model
 % delta = 0.02;
 % beta = 0.01;
@@ -44,5 +44,5 @@ plot(t,-y,'*-'); grid on; axis tight
 function dydt = myode(t,y,ft,f,gt,g)
 f = interp1(ft,f,t); % Interpolate the data set (ft,f) at time t
 g = interp1(gt,g,t); % Interpolate the data set (gt,g) at time t
-dydt = -y./g + f; % Evaluate ODE at time t
+dydt = [(-y(1)./g + f); y(1).*y(2)];% Evaluate ODE at time t
 end
